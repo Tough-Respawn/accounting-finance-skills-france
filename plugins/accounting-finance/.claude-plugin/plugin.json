@@ -1,0 +1,7 @@
+{
+  "name": "accounting-finance",
+  "description": "French accounting and corporate finance assistant with domain-specific expertise across general accounting, cost accounting, IFRS, corporate finance, tax, audit, management control, and payroll. Supports financial analysis, accounting entries, tax optimization, and document parsing.",
+  "author": {
+    "name": "Amine Harrak"
+  }
+}

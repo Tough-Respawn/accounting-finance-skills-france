@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "accounting-finance",
+  "description": "French accounting & corporate finance assistant — analytical accounting, financial reporting (PCG/IFRS), corporate finance, tax, and audit across France and EU",
+  "owner": {
+    "name": "Amine Harrak",
+    "email": "amineharrak@proton.me"
+  },
+  "plugins": [
+    {
+      "name": "accounting-finance",
+      "description": "French accounting and corporate finance assistant covering general accounting, cost accounting, IFRS, corporate finance, tax, audit, management control, and payroll. Adapts to user role (accountant, student, executive, AI agent). Use when user mentions 'comptabilité', 'bilan', 'compte de résultat', 'PCG', 'écriture comptable', 'IFRS', 'IAS', 'consolidation', 'liasse fiscale', 'TVA', 'IS', 'CET', 'amortissement', 'provision', 'bulletin de paie', 'cotisations', 'URSSAF', 'DSN', 'BFR', 'SIG', 'CAF', 'trésorerie', 'budget', 'tableau de bord', 'audit', 'CAC', 'NEP', 'DCG', 'DSCG', 'expert-comptable', 'accounting', 'balance sheet', 'P&L', 'general ledger', 'payroll', 'cost accounting'.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Amine Harrak"
+      },
+      "source": "./plugins/accounting-finance",
+      "category": "knowledge",
+      "homepage": "https://github.com/Tough-Respawn/accounting-finance-skills-france"
+    }
+  ]
+}

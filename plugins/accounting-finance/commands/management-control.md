@@ -1,0 +1,14 @@
+---
+description: French management control — budgeting, dashboards, reporting, variance analysis, balanced scorecard
+argument-hint: <your management control question>
+allowed-tools: [Read, Grep, Glob, WebSearch, WebFetch]
+---
+
+Invoke the `accounting-finance` skill to answer the user's question.
+
+## Workflow
+1. Skip domain routing — read `references/controle-gestion.md` directly
+2. Apply the response template based on detected user role (see SKILL.md Response Protocol)
+3. If embedded references are insufficient, use WebSearch to query official sources
+4. Cite all sources precisely
+5. End with the mandatory disclaimer
