@@ -25,7 +25,7 @@ python scripts/skill.py install --agent codex --project "/chemin/vers/mon-projet
 Exemple Windows :
 
 ```powershell
-python scripts/skill.py install --agent claude-code cursor --project "C:\Users\Amine\Documents\mon-projet"
+python scripts/skill.py install --agent claude-code cursor --project "C:\Projets\mon-projet"
 ```
 
 Pour un dossier personnel ou un autre emplacement reconnu par votre agent :

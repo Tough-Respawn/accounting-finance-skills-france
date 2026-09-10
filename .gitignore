@@ -1,6 +1,7 @@
 .claude/
 docs/
 CLAUDE.md
+CLAUDE.local.md
 
 # Local Python and generated context bundles
 __pycache__/
