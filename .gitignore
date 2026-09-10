@@ -1,3 +1,9 @@
 .claude/
 docs/
 CLAUDE.md
+
+# Local Python and generated context bundles
+__pycache__/
+*.py[cod]
+.pytest_cache/
+/dist/

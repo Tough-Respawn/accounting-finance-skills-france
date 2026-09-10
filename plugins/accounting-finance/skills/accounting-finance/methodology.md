@@ -1,6 +1,6 @@
 # Response Templates — accounting-finance
 
-This file defines the eight structured response templates used by the accounting-finance skill. Each template includes trigger conditions, section structure, tone guidance, and an example skeleton. The template to use is selected by `SKILL.md`’s Response Protocol (command > role > request nature).
+This file defines the eight response templates used by the accounting-finance skill. Read only the relevant template. Follow `SKILL.md` for selection: explicit user format/schema > complex case > requested deliverable > role adaptation. Domain commands only select a subject; they do not override the requested format. Examples illustrate structure and must not be treated as verified current rules or rates.
 
 ---
 
@@ -20,7 +20,7 @@ Every response must be anchored in normative references, with precise account nu
 
 **Trigger conditions:**
 - User role is `expert-comptable` or `collaborateur`
-- User invokes `/compta` (or any domain command) and role is detected as `expert-comptable` or `collaborateur`
+- User selects general accounting and requests an accounting treatment
 - User describes a transaction and asks for the journal entry or accounting treatment
 - Question requires identification of PCG accounts, debit/credit logic, and normative justification
 - User mentions “écriture”, “comptabiliser”, “enregistrement”, “journal”, “OD”
@@ -92,7 +92,7 @@ Journal : Achats
 
 **Trigger conditions:**
 - User role is `dirigeant`, `DAF`, or `analyste`
-- User invokes `/finance` and the request involves diagnostic, ratios, or financial health
+- User requests a financial diagnostic, ratios, or an assessment of financial health
 - User provides financial data (bilan, compte de résultat, liasse fiscale) and asks for interpretation
 - User mentions “analyse financière”, “diagnostic”, “SIG”, “soldes intermédiaires”, “ratios”, “rentabilité”
 - Question requires computation and interpretation of financial indicators
@@ -217,7 +217,7 @@ Vigilance : Délai client en augmentation (52 j. vs 45 j. en N-1).
 
 **Trigger conditions:**
 - User role is `expert-comptable`, `fiscaliste`, or `DAF`
-- User invokes `/fiscal` or `/impôts` and asks a tax question
+- User selects taxation and asks a tax question
 - Question involves corporate tax (IS), VAT (TVA), CET (CFE/CVAE), income tax (IR), or specific tax regime
 - User mentions “IS”, “TVA”, “CGI”, “BOFiP”, “optimisation fiscale”, “plus-value”, “déficit”, “intégration fiscale”, “crédit d’impôt”
 - Question requires identifying the applicable tax regime, computing a tax liability, or evaluating tax options
@@ -317,7 +317,7 @@ IS dû (25 %) : 193 175 EUR
 
 **Trigger conditions:**
 - User role is `étudiant` (student)
-- User invokes `/compta` or `/finance` and role is detected as `étudiant`
+- User requests an accounting or finance exercise and role is detected as `étudiant`
 - User describes an exercise, problem set, or case study and asks for the solution
 - User mentions “exercice”, “TD”, “partiel”, “examen”, “correction”, “corrigé”, “calculer”
 - Question involves applying a formula, method, or accounting rule to given data
@@ -420,7 +420,7 @@ L’entreprise ABC est rentable avec une marge de sécurité confortable de 25 %
 
 **Trigger conditions:**
 - User asks about payroll, payslip, cotisations sociales, net à payer, coût employeur
-- User invokes `/paie` or `/social` and the request involves salary computation
+- User selects payroll and requests a salary computation
 - User role is `expert-comptable`, `collaborateur`, `RH`, or `salarié`
 - User mentions “bulletin de paie”, “fiche de paie”, “cotisations”, “net imposable”, “net à payer”, “Urssaf”, “charges patronales”, “charges salariales”
 - Question requires decomposing gross salary into net salary through social contributions
@@ -548,7 +548,7 @@ Ratio : pour 1 EUR net versé au salarié, l’employeur débourse 1,67 EUR au t
 
 **Trigger conditions:**
 - User role is `dirigeant`, `DAF`, or `contrôleur-de-gestion`
-- User invokes `/gestion` or `/pilotage` and requests a dashboard, KPIs, or performance indicators
+- User selects management control and requests a dashboard, KPIs, or performance indicators
 - User mentions “tableau de bord”, “KPI”, “indicateurs”, “pilotage”, “reporting”, “balanced scorecard”
 - Question requires defining, computing, or interpreting performance metrics for management decision-making
 
@@ -782,11 +782,13 @@ Risques résiduels : l'administration fiscale pourrait contester le changement (
 **Section structure:**
 
 ### 1. Schéma de sortie (Output Schema)
-Before emitting data, declare the schema. The schema documents every field:
+When the user has not supplied a schema, return one JSON object with `schema`, `data`, `references` and `metadata` fields. The schema declaration belongs inside that object, not in a separate response or JSON value. The fragments and payload examples below illustrate fields; assemble them into the single envelope and include the actual warnings and disclaimer. For a supplied schema, follow `SKILL.md`'s output contract instead.
+
+Example `schema` field contents (a descriptive contract, not a formal JSON Schema):
 
 ```json
 {
-  "": "accounting-finance/v1",
+  "id": "accounting-finance/v1",
   "type": "[output_type]",
   "description": "[what this output represents]",
   "fields": {
@@ -830,12 +832,13 @@ Include provenance and reliability information:
 ```json
 {
   "metadata": {
-    "generated_at": "YYYY-MM-DDTHH:MM:SSZ",
+    "generated_at": null,
     "skill_version": "accounting-finance/v1",
-    "data_freshness": "YYYY-MM",
+    "data_freshness": null,
     "confidence": "high|medium|low",
     "verification_required": true,
-    "warnings": ["[any caveats]"]
+    "warnings": ["[actual verification limits, if any]"],
+    "disclaimer": "[professional-information notice in the user's language]"
   }
 }
 ```
@@ -1171,10 +1174,10 @@ Include provenance and reliability information:
 
 **Rules for structured output:**
 1. Never mix prose and data. Use a separate `"notes"` array field if needed.
-2. Always include the schema declaration at the top of the output.
+2. Emit a single parseable JSON value. Use the user's schema, or the envelope described above. No Markdown fences, separate schema value, progress text or appended prose.
 3. All monetary amounts use 2 decimal places.
 4. All rates use decimal form (0.25, not 25 %).
 5. Dates use ISO 8601.
-6. Include `metadata` block with generation timestamp, data freshness, and confidence level.
+6. Include `metadata` with generation timestamp, data freshness, confidence, verification status, warnings and disclaimer. Use `null` for unknown dates; never invent verification or freshness information.
 7. If verification needed, set `"verification_required": true` and list URLs in `"warnings"`.
-8. For multiple output types, wrap in array under `"results"` key.
+8. For multiple output types, put a `"results"` array inside `"data"`, unless the user supplies another schema.

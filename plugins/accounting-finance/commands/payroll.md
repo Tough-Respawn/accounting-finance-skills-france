@@ -4,12 +4,12 @@ argument-hint: <your payroll question>
 allowed-tools: [Read, Grep, Glob, WebSearch, WebFetch]
 ---
 
-Invoke the `accounting-finance` skill to answer the user's question.
+Read `${CLAUDE_PLUGIN_ROOT}/skills/accounting-finance/SKILL.md` and follow that skill to answer the request below.
 
-## Workflow
-1. Skip domain routing — read `references/paie.md` directly
-2. Also read `references/taux-baremes.md` for current rates and `references/pcg-index.md` for account lookup
-3. Apply the response template based on detected user role (see SKILL.md Response Protocol)
-4. If embedded references are insufficient, use WebSearch to query URSSAF or Legifrance
-5. Cite all sources precisely (Code du travail articles, URSSAF rates)
-6. End with the mandatory disclaimer
+Start with `references/paie.md`; include other domains when they affect the answer.
+
+Resolve all supporting resources relative to that SKILL.md directory. Apply its verification, response-selection and uncertainty rules, including when embedded references already contain an answer. Preserve an explicit output format such as JSON; include warnings and the professional-information notice inside its metadata.
+
+## User request
+
+$ARGUMENTS

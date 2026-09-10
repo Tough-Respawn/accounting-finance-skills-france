@@ -9,8 +9,8 @@
   "plugins": [
     {
       "name": "accounting-finance",
-      "description": "French accounting and corporate finance assistant covering general accounting, cost accounting, IFRS, corporate finance, tax, audit, management control, and payroll. Adapts to user role (accountant, student, executive, AI agent). Use when user mentions 'comptabilité', 'bilan', 'compte de résultat', 'PCG', 'écriture comptable', 'IFRS', 'IAS', 'consolidation', 'liasse fiscale', 'TVA', 'IS', 'CET', 'amortissement', 'provision', 'bulletin de paie', 'cotisations', 'URSSAF', 'DSN', 'BFR', 'SIG', 'CAF', 'trésorerie', 'budget', 'tableau de bord', 'audit', 'CAC', 'NEP', 'DCG', 'DSCG', 'expert-comptable', 'accounting', 'balance sheet', 'P&L', 'general ledger', 'payroll', 'cost accounting'.",
-      "version": "1.0.0",
+      "description": "Portable French accounting and corporate finance skill: PCG, IFRS, tax, audit, management control and payroll, with optional Claude Code commands.",
+      "version": "1.1.0",
       "author": {
         "name": "Amine Harrak"
       },

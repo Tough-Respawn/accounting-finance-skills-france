@@ -4,11 +4,12 @@ argument-hint: <your audit question>
 allowed-tools: [Read, Grep, Glob, WebSearch, WebFetch]
 ---
 
-Invoke the `accounting-finance` skill to answer the user's question.
+Read `${CLAUDE_PLUGIN_ROOT}/skills/accounting-finance/SKILL.md` and follow that skill to answer the request below.
 
-## Workflow
-1. Skip domain routing — read `references/audit.md` directly
-2. Apply the response template based on detected user role (see SKILL.md Response Protocol)
-3. If embedded references are insufficient, use WebSearch to query official sources
-4. Cite all sources precisely (NEP numbers, Code de commerce articles)
-5. End with the mandatory disclaimer
+Start with `references/audit.md`; include other domains when they affect the answer.
+
+Resolve all supporting resources relative to that SKILL.md directory. Apply its verification, response-selection and uncertainty rules, including when embedded references already contain an answer. Preserve an explicit output format such as JSON; include warnings and the professional-information notice inside its metadata.
+
+## User request
+
+$ARGUMENTS
